@@ -213,26 +213,42 @@ body {
   min-width: 0.72em;
   margin: 0 0.02em;
   border-bottom: 2px solid var(--accent);
-  /* the small delay lets the last letter's pop-in land before the word
+  /* the small delay lets the letter's pop-in land before its slot
      collapses to natural spacing */
   transition: border-color 0.25s, min-width 0.5s ease 0.2s,
-    margin 0.5s ease 0.2s;
-}
-
-/* once every letter of a word is revealed, let it read as normal text */
-.word-complete .cell-letter {
-  min-width: 0;
-  margin: 0;
-  border-bottom-color: transparent;
+    margin 0.5s ease 0.2s, color 0.4s ease;
 }
 
 .cell-hidden {
   color: transparent;
 }
 
+/* a filled blank gives up its reserved slot right away and reads as text */
 .cell-revealed {
+  min-width: 0;
+  margin: 0;
   border-bottom-color: transparent;
   animation: pop-in 0.3s ease;
+}
+
+/* words still holding blanks show their found letters brown and bolder */
+.word:not(.word-complete) .cell-revealed {
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+/* fully-revealed words settle into plain black text */
+.word-complete .cell-letter {
+  min-width: 0;
+  margin: 0;
+  border-bottom-color: transparent;
+  color: #1c1914;
+  font-weight: 400;
+}
+
+/* letters revealed by losing stay red even in completed words */
+.word-complete .cell-missed {
+  color: var(--red);
 }
 
 .cell-missed {
