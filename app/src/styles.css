@@ -187,7 +187,7 @@ body {
 .sentence {
   font-family: var(--serif);
   font-size: clamp(1rem, 3vh, 1.7rem);
-  line-height: 1.75;
+  line-height: 1.45;
   text-align: center;
   max-width: 58rem;
 }
@@ -305,14 +305,14 @@ body {
 }
 
 .key {
-  width: clamp(1.7rem, 3.4vw, 2.5rem);
-  height: clamp(1.9rem, 5.2vh, 2.9rem);
+  width: clamp(2rem, 4.2vw, 3.1rem);
+  height: clamp(2.2rem, 6.5vh, 3.6rem);
   border: 1px solid var(--line);
   border-radius: 0.5rem;
   background: rgba(255, 255, 255, 0.65);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: clamp(0.8rem, 2vh, 1rem);
+  font-size: clamp(0.9rem, 2.4vh, 1.2rem);
   font-weight: 500;
   text-transform: uppercase;
   cursor: pointer;
