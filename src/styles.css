@@ -186,10 +186,20 @@ body {
 }
 
 .cell-letter {
-  min-width: 1.05em;
-  margin: 0 0.06em;
+  min-width: 0.8em;
+  margin: 0 0.03em;
   border-bottom: 2px solid var(--accent);
-  transition: border-color 0.25s;
+  /* the small delay lets the last letter's pop-in land before the word
+     collapses to natural spacing */
+  transition: border-color 0.25s, min-width 0.5s ease 0.2s,
+    margin 0.5s ease 0.2s;
+}
+
+/* once every letter of a word is revealed, let it read as normal text */
+.word-complete .cell-letter {
+  min-width: 0;
+  margin: 0;
+  border-bottom-color: transparent;
 }
 
 .cell-hidden {
