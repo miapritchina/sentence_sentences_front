@@ -1,3 +1,5 @@
+import { LETTER_VALUES } from '../scoring.js';
+
 const ROWS = ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'];
 
 export default function Keyboard({ guessed, letters, onGuess }) {
@@ -15,10 +17,13 @@ export default function Keyboard({ guessed, letters, onGuess }) {
                 onClick={() => onGuess(letter)}
                 disabled={used}
                 aria-label={
-                  used ? `${letter}, already guessed` : `Guess letter ${letter}`
+                  used
+                    ? `${letter}, already guessed`
+                    : `Guess letter ${letter}, worth ${LETTER_VALUES[letter]} points`
                 }
               >
                 {letter}
+                {!used && <span className="key-value">{LETTER_VALUES[letter]}</span>}
               </button>
             );
           })}

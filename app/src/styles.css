@@ -165,6 +165,83 @@ body {
   transform: scale(0.85);
 }
 
+/* ---------- score ---------- */
+
+.score-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.score {
+  position: relative;
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 3.4vh, 1.9rem);
+  font-weight: 600;
+  line-height: 1;
+  min-width: 2ch;
+}
+
+.score-delta {
+  position: absolute;
+  left: calc(100% + 0.35em);
+  top: -0.2em;
+  font-family: var(--sans);
+  font-size: 0.55em;
+  font-weight: 600;
+  animation: delta-float 1.2s ease forwards;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.score-delta-plus {
+  color: var(--green);
+}
+
+.score-delta-minus {
+  color: var(--red);
+}
+
+@keyframes delta-float {
+  0% {
+    opacity: 0;
+    transform: translateY(0.4em);
+  }
+  20% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-0.6em);
+  }
+}
+
+.score-chip {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--accent-strong);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 0.12rem 0.55rem;
+  white-space: nowrap;
+}
+
+.score-chip-streak {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+.final-score {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(1.05rem, 2.6vh, 1.35rem);
+  font-weight: 600;
+}
+
 /* ---------- sentence board ---------- */
 
 .board {
@@ -321,6 +398,7 @@ body {
 }
 
 .key {
+  position: relative;
   width: clamp(2rem, 4.2vw, 3.1rem);
   height: clamp(2.2rem, 6.5vh, 3.6rem);
   border: 1px solid var(--line);
@@ -361,6 +439,16 @@ body {
   background: transparent;
   color: var(--line);
   text-decoration: line-through;
+}
+
+.key-value {
+  position: absolute;
+  right: 0.22em;
+  bottom: 0.12em;
+  font-size: 0.55em;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
 }
 
 /* ---------- buttons ---------- */
