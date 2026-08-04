@@ -187,7 +187,7 @@ body {
 .sentence {
   font-family: var(--serif);
   font-size: clamp(1rem, 3vh, 1.7rem);
-  line-height: 2.05;
+  line-height: 1.75;
   text-align: center;
   max-width: 58rem;
 }
@@ -195,7 +195,7 @@ body {
 .word {
   display: inline-block;
   white-space: nowrap;
-  margin: 0 0.55em;
+  margin: 0 0.35em;
 }
 
 .cell {
@@ -204,8 +204,8 @@ body {
 }
 
 .cell-letter {
-  min-width: 0.8em;
-  margin: 0 0.03em;
+  min-width: 0.72em;
+  margin: 0 0.02em;
   border-bottom: 2px solid var(--accent);
   /* the small delay lets the last letter's pop-in land before the word
      collapses to natural spacing */
