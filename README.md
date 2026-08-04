@@ -5,6 +5,11 @@ reveal it one letter at a time. Ten wrong guesses and the sentence slips away.
 
 Built with [React](https://react.dev) and [Vite](https://vitejs.dev).
 
+The app source lives in `app/`. The `index.html`, `assets/`, and `favicon.svg`
+at the repository root are the build output, committed automatically by CI so
+GitHub Pages (which serves the branch root) always has the built site — don't
+edit them by hand.
+
 ## Getting started
 
 ```bash
