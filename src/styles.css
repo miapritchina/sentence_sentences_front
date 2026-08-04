@@ -17,7 +17,9 @@
 }
 
 html,
-body {
+body,
+#root {
+  height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -30,33 +32,39 @@ body {
       transparent 60%
     ),
     linear-gradient(var(--paper), var(--paper-deep));
-  min-height: 100vh;
   color: var(--ink);
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
+  overflow: hidden;
 }
 
+/* the whole game fits the viewport — no scrolling */
 .app {
-  max-width: 60rem;
+  height: 100dvh;
+  max-width: 64rem;
   margin: 0 auto;
-  padding: 2.5rem 1.25rem 3rem;
+  padding: clamp(0.5rem, 1.5vh, 1.25rem) 1.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  justify-content: space-between;
+  gap: clamp(0.25rem, 1.2vh, 1rem);
+  overflow: hidden;
 }
 
 /* ---------- header ---------- */
 
 .header {
   text-align: center;
+  flex: 0 0 auto;
 }
 
 .title {
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-size: clamp(1.4rem, 4.5vh, 2.6rem);
   letter-spacing: 0.02em;
+  line-height: 1.1;
   margin: 0;
 }
 
@@ -65,37 +73,43 @@ body {
   display: block;
   width: 5rem;
   height: 2px;
-  margin: 0.6rem auto 0;
+  margin: 0.35em auto 0;
   background: var(--accent);
   border-radius: 1px;
 }
 
 .subtitle {
-  margin: 0.75rem 0 0;
+  margin: 0.4em 0 0;
   color: var(--ink-soft);
-  font-size: 0.95rem;
+  font-size: clamp(0.7rem, 1.6vh, 0.9rem);
 }
 
 /* ---------- layout ---------- */
 
 .game {
   width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.75rem;
+  justify-content: space-evenly;
+  gap: clamp(0.25rem, 1.2vh, 1rem);
 }
 
+/* gallows and status sit side by side to save vertical space */
 .stage {
+  flex: 0 0 auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1.5rem;
 }
 
 .gallows {
-  width: 160px;
-  height: 192px;
+  height: clamp(80px, 22vh, 170px);
+  width: auto;
+  aspect-ratio: 200 / 240;
   color: var(--ink);
 }
 
@@ -125,7 +139,7 @@ body {
 .status {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.6rem;
 }
 
@@ -155,10 +169,14 @@ body {
 
 .board {
   width: 100%;
+  flex: 0 1 auto;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  justify-content: center;
+  gap: clamp(0.3rem, 1.5vh, 1rem);
+  overflow: hidden;
 }
 
 .loading {
@@ -168,10 +186,10 @@ body {
 
 .sentence {
   font-family: var(--serif);
-  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
-  line-height: 2.4;
+  font-size: clamp(1rem, 3vh, 1.7rem);
+  line-height: 2.05;
   text-align: center;
-  max-width: 54rem;
+  max-width: 58rem;
 }
 
 .word {
@@ -237,14 +255,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.3rem;
   text-align: center;
   animation: pop-in 0.4s ease;
 }
 
 .outcome-message {
   font-family: var(--serif);
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 2.8vh, 1.5rem);
   font-style: italic;
   margin: 0;
 }
@@ -261,33 +279,34 @@ body {
   margin: 0;
   color: var(--ink-soft);
   font-family: var(--serif);
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 2.2vh, 1.1rem);
 }
 
 /* ---------- keyboard ---------- */
 
 .keyboard {
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.45rem;
+  gap: clamp(0.25rem, 0.8vh, 0.45rem);
   user-select: none;
 }
 
 .keyboard-row {
   display: flex;
-  gap: 0.4rem;
+  gap: clamp(0.25rem, 0.7vw, 0.4rem);
 }
 
 .key {
-  width: clamp(1.9rem, 7.5vw, 2.6rem);
-  height: clamp(2.4rem, 9vw, 3rem);
+  width: clamp(1.7rem, 3.4vw, 2.5rem);
+  height: clamp(1.9rem, 5.2vh, 2.9rem);
   border: 1px solid var(--line);
   border-radius: 0.5rem;
   background: rgba(255, 255, 255, 0.65);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 1rem;
+  font-size: clamp(0.8rem, 2vh, 1rem);
   font-weight: 500;
   text-transform: uppercase;
   cursor: pointer;
@@ -326,16 +345,16 @@ body {
 
 .btn {
   font-family: var(--sans);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   border-radius: 999px;
-  padding: 0.55rem 1.4rem;
+  padding: 0.5rem 1.3rem;
   cursor: pointer;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
 .btn-primary {
-  margin-top: 0.5rem;
+  margin-top: 0.3rem;
   border: none;
   background: var(--accent);
   color: #fff;
@@ -364,21 +383,25 @@ body {
 /* ---------- footer ---------- */
 
 .footer {
+  flex: 0 0 auto;
   color: var(--ink-soft);
-  font-size: 0.8rem;
+  font-size: clamp(0.65rem, 1.5vh, 0.8rem);
   letter-spacing: 0.03em;
 }
 
+/* on short viewports, drop the decorative extras to protect the game */
+@media (max-height: 560px) {
+  .subtitle,
+  .footer {
+    display: none;
+  }
+}
+
 @media (max-width: 480px) {
-  .app {
-    padding-top: 1.5rem;
-    gap: 1.4rem;
+  .stage {
+    gap: 0.75rem;
   }
-  .gallows {
-    width: 120px;
-    height: 144px;
-  }
-  .sentence {
-    line-height: 2.2;
+  .word {
+    margin: 0 0.4em;
   }
 }
