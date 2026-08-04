@@ -196,6 +196,12 @@ body {
   display: inline-block;
   white-space: nowrap;
   margin: 0 0.35em;
+  transition: margin 0.5s ease 0.2s;
+}
+
+/* between two fully-revealed words, close the gap to a normal word space */
+.word-complete + .word-complete {
+  margin-left: -0.1em;
 }
 
 .cell {
