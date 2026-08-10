@@ -1,75 +1,36 @@
-// Bundled Jane Austen sentences (all public domain), used when no API is configured
-// or the API is unreachable.
-const SENTENCES = [
+// Bundled Jane Austen sentences (all public domain), used when no API is
+// configured or the API is unreachable.
+//
+// Difficulty rules — a sentence qualifies only if:
+//   - it is 40..90 characters long: long sentences contain so many letter
+//     occurrences that almost every guess lands, and very short ones
+//     ("Oh, well") are over in three guesses;
+//   - it uses at most 17 distinct letters: the fewer distinct letters a
+//     sentence has, the more of the alphabet is a miss, which is what makes
+//     a round genuinely risky.
+// Candidates violating the rules are dropped at load (with a dev warning),
+// so new additions are checked automatically.
+
+export const MIN_LENGTH = 40;
+export const MAX_LENGTH = 90;
+export const MAX_DISTINCT_LETTERS = 17;
+
+export function meetsDifficulty(text) {
+  const distinct = new Set(
+    text.toLowerCase().split('').filter((ch) => ch >= 'a' && ch <= 'z')
+  ).size;
+  return (
+    text.length >= MIN_LENGTH &&
+    text.length <= MAX_LENGTH &&
+    distinct <= MAX_DISTINCT_LETTERS
+  );
+}
+
+const CANDIDATES = [
   {
-    text: 'It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.',
+    text: 'You pierce my soul. I am half agony, half hope.',
     author: 'Jane Austen',
-    book: 'Pride and Prejudice',
-  },
-  {
-    text: 'However little known the feelings or views of such a man may be on his first entering a neighbourhood, this truth is so well fixed in the minds of the surrounding families, that he is considered as the rightful property of some one or other of their daughters.',
-    author: 'Jane Austen',
-    book: 'Pride and Prejudice',
-  },
-  {
-    text: 'A lady’s imagination is very rapid; it jumps from admiration to love, from love to matrimony, in a moment.',
-    author: 'Jane Austen',
-    book: 'Pride and Prejudice',
-  },
-  {
-    text: 'You must allow me to tell you how ardently I admire and love you.',
-    author: 'Jane Austen',
-    book: 'Pride and Prejudice',
-  },
-  {
-    text: 'I declare after all there is no enjoyment like reading!',
-    author: 'Jane Austen',
-    book: 'Pride and Prejudice',
-  },
-  {
-    text: 'Vanity and pride are different things, though the words are often used synonymously.',
-    author: 'Jane Austen',
-    book: 'Pride and Prejudice',
-  },
-  {
-    text: 'Angry people are not always wise.',
-    author: 'Jane Austen',
-    book: 'Pride and Prejudice',
-  },
-  {
-    text: 'There is a stubbornness about me that never can bear to be frightened at the will of others.',
-    author: 'Jane Austen',
-    book: 'Pride and Prejudice',
-  },
-  {
-    text: 'Till this moment I never knew myself.',
-    author: 'Jane Austen',
-    book: 'Pride and Prejudice',
-  },
-  {
-    text: 'What are men to rocks and mountains?',
-    author: 'Jane Austen',
-    book: 'Pride and Prejudice',
-  },
-  {
-    text: 'The person, be it gentleman or lady, who has not pleasure in a good novel, must be intolerably stupid.',
-    author: 'Jane Austen',
-    book: 'Northanger Abbey',
-  },
-  {
-    text: 'There is nothing I would not do for those who are really my friends.',
-    author: 'Jane Austen',
-    book: 'Northanger Abbey',
-  },
-  {
-    text: 'It is well to have as many holds upon happiness as possible.',
-    author: 'Jane Austen',
-    book: 'Northanger Abbey',
-  },
-  {
-    text: 'If I loved you less, I might be able to talk about it more.',
-    author: 'Jane Austen',
-    book: 'Emma',
+    book: 'Persuasion',
   },
   {
     text: 'It is such a happiness when good people get together.',
@@ -77,60 +38,108 @@ const SENTENCES = [
     book: 'Emma',
   },
   {
-    text: 'Silly things do cease to be silly if they are done by sensible people in an impudent way.',
+    text: 'There is no charm equal to tenderness of heart.',
     author: 'Jane Austen',
     book: 'Emma',
   },
   {
-    text: 'Why not seize the pleasure at once? How often is happiness destroyed by preparation, foolish preparation!',
-    author: 'Jane Austen',
-    book: 'Emma',
-  },
-  {
-    text: 'Know your own happiness. You want nothing but patience; or give it a more fascinating name: call it hope.',
+    text: 'To wish was to hope, and to hope was to expect.',
     author: 'Jane Austen',
     book: 'Sense and Sensibility',
   },
   {
-    text: 'It is not time or opportunity that is to determine intimacy: it is disposition alone.',
-    author: 'Jane Austen',
-    book: 'Sense and Sensibility',
-  },
-  {
-    text: 'The more I know of the world, the more I am convinced that I shall never see a man whom I can really love.',
-    author: 'Jane Austen',
-    book: 'Sense and Sensibility',
-  },
-  {
-    text: 'I cannot fix on the hour, or the spot, or the look, or the words, which laid the foundation. It is too long ago. I was in the middle before I knew that I had begun.',
+    text: 'Everything nourishes what is strong already.',
     author: 'Jane Austen',
     book: 'Pride and Prejudice',
   },
   {
-    text: 'You pierce my soul. I am half agony, half hope.',
-    author: 'Jane Austen',
-    book: 'Persuasion',
-  },
-  {
-    text: 'My idea of good company is the company of clever, well-informed people who have a great deal of conversation.',
-    author: 'Jane Austen',
-    book: 'Persuasion',
-  },
-  {
-    text: 'One half of the world cannot understand the pleasures of the other.',
+    text: 'Without music, life would be a blank to me.',
     author: 'Jane Austen',
     book: 'Emma',
   },
   {
-    text: 'To sit in the shade on a fine day, and look upon verdure, is the most perfect refreshment.',
+    text: 'One cannot be always laughing at a man without now and then stumbling on something witty.',
+    author: 'Jane Austen',
+    book: 'Pride and Prejudice',
+  },
+  {
+    text: 'My good opinion once lost is lost forever.',
+    author: 'Jane Austen',
+    book: 'Pride and Prejudice',
+  },
+  {
+    text: 'Ah! There is nothing like staying at home, for real comfort.',
+    author: 'Jane Austen',
+    book: 'Emma',
+  },
+  {
+    text: 'Nobody minds having what is too good for them.',
     author: 'Jane Austen',
     book: 'Mansfield Park',
   },
   {
-    text: 'We have all a better guide in ourselves, if we would attend to it, than any other person can be.',
+    text: 'It is very difficult for the prosperous to be humble.',
+    author: 'Jane Austen',
+    book: 'Emma',
+  },
+  {
+    text: 'Those who do not complain are never pitied.',
+    author: 'Jane Austen',
+    book: 'Pride and Prejudice',
+  },
+  {
+    text: 'To be fond of dancing was a certain step towards falling in love.',
+    author: 'Jane Austen',
+    book: 'Pride and Prejudice',
+  },
+  {
+    text: 'From this day you must be a stranger to one of your parents.',
+    author: 'Jane Austen',
+    book: 'Pride and Prejudice',
+  },
+  {
+    text: 'There are people, who the more you do for them, the less they will do for themselves.',
+    author: 'Jane Austen',
+    book: 'Emma',
+  },
+  {
+    text: 'I cannot speak well enough to be unintelligible.',
+    author: 'Jane Austen',
+    book: 'Northanger Abbey',
+  },
+  {
+    text: 'What is right to be done cannot be done too soon.',
+    author: 'Jane Austen',
+    book: 'Emma',
+  },
+  {
+    text: 'Human nature is so well disposed towards those who are in interesting situations.',
+    author: 'Jane Austen',
+    book: 'Emma',
+  },
+  {
+    text: 'None of us want to be in calm waters all our lives.',
+    author: 'Jane Austen',
+    book: 'Persuasion',
+  },
+  {
+    text: 'Every moment has its pleasures and its hope.',
     author: 'Jane Austen',
     book: 'Mansfield Park',
   },
+  {
+    text: 'Money can only give happiness where there is nothing else to give it.',
+    author: 'Jane Austen',
+    book: 'Sense and Sensibility',
+  },
 ];
+
+const SENTENCES = CANDIDATES.filter((s) => {
+  const ok = meetsDifficulty(s.text);
+  if (!ok && import.meta.env.DEV) {
+    console.warn(`Sentence rejected by difficulty rules: "${s.text}"`);
+  }
+  return ok;
+});
 
 export default SENTENCES;
